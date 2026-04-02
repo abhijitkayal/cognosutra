@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, use } from "react";
 import Image from "next/image";
 import logo from "../public/cropped_circle_image.png"
 import factory_floor from "../public/Factory floor, precise machinery, assembly line.jpg";
@@ -10,6 +10,7 @@ import retail from "../public/retail.jpg";
 import girl from "../public/Gemini_Generated_Image_p425nlp425nlp425.png";
 import art from "../public/Art gallery.png";
 import lapy from "../public/image.png";
+
 
 /* ─────────────────────────────────────────
    ALL UNSPLASH IMAGES — reliable, themed
@@ -65,7 +66,7 @@ function Logo() {
    DATA
 ═══════════════════════════════════════════ */
 const EQ_COLS = [3,5,7,9,11,13,15,13,11,10,8,13,14,12,10,8,6,4,6,8,11,13,12,10];
-const CATALOG_ITEMS = ["Market Insight","Pricing Intelligence","Demand Forecasting","Mobility Analysis"];
+const CATALOG_ITEMS = ["Data Cleaning and Processing","Platform Analysis and Review Aggregator","Consumer Research (Behaviour Analysis)","Branding Strategy","Demand Forecasting","Pricing Intelligence and Product Differentiation Report"];
 const NAV_ITEMS: [string,string][] = [["about","About"],["team","Team"],["offerings","Offerings"],["contact","Contact"]];
 
 /* shared input style */
@@ -94,7 +95,10 @@ function CatalogFlipCard() {
   const [company,   setCompany]   = useState("");
   const [message,   setMessage]   = useState("");
   const [interests, setInterests] = useState<string[]>([]);
+  const [catalog, setCatalog] =useState<string[]>([]);
   const backRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+  
 
   const toggleCat = (v: string) =>
     setCatSel(p => p.includes(v) ? p.filter(x => x !== v) : [...p, v]);
@@ -112,7 +116,43 @@ function CatalogFlipCard() {
   useEffect(() => {
     if (flipped && backRef.current) backRef.current.scrollTop = 0;
   }, [flipped]);
+ const handlemessageSent= async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
 
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        company,
+        message,
+        interests,
+        catalog: catSel,
+      }),
+    });
+    alert("Sending message...");
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setFormSent(true);
+    } else {
+      alert(data.message || "Something went wrong");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Failed to send message");
+  }
+  finally {
+    setLoading(false);
+  }
+
+};
   return (
     <div style={{ perspective: "1400px", width: "100%" }}>
       <div style={{
@@ -215,10 +255,20 @@ function CatalogFlipCard() {
                   placeholder="Tell us about your challenge..." style={{ ...inputStyle, resize:"none" }} />
               </div>
               <div style={{ paddingTop:".3rem" }}>
-                <button type="submit" className="btn3d primary" style={{ width:"fit-content" }}>
-                  <span className="top">Send Message →</span>
-                  <span className="bot" />
-                </button>
+              <button
+  type="submit"
+  className="btn3d primary"
+  onClick={handlemessageSent}
+  disabled={loading}
+  style={{
+    opacity: loading ? 0.7 : 1,
+    cursor: loading ? "not-allowed" : "pointer"
+  }}
+>
+  <span className="top">
+    {loading ? "Sending..." : "Send Message →"}
+  </span>
+</button>
               </div>
             </form>
           ) : (
@@ -682,7 +732,9 @@ useEffect(() => {
         <div className="footer-inner">
           <div className="footer-top">
             <div className="footer-brand">
-              <div className="logo-row"><Logo /><span className="nav-logo-txt">Cognosutra</span></div>
+              <div className="logo-row">
+                <Image src={logo} alt="logo" height={48} width={48}/>
+                <span className="nav-logo-txt">Cognosutra</span></div>
               <p className="text-green">Decoding business chaos into clarity.<br />Kolkata, West Bengal, India.</p>
               <div className="footer-socials">
                 <a href="mailto:hello@cognosutra.com" className="f-ico" title="Email">✉</a>
