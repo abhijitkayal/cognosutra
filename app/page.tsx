@@ -10,6 +10,7 @@ import retail from "../public/retail.jpg";
 import girl from "../public/Gemini_Generated_Image_p425nlp425nlp425.png";
 import art from "../public/Art gallery.png";
 import lapy from "../public/image.png";
+import girl1 from "../public/Gemini_Generated_Image_bt7pq1bt7pq1bt7p.png";
 
 
 /* ─────────────────────────────────────────
@@ -337,6 +338,15 @@ export default function Home() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const now = new Date();
+
+const time = now.toLocaleTimeString("en-IN", {
+  timeZone: "Asia/Kolkata",
+});
+
+const date = now.toLocaleDateString("en-IN", {
+  timeZone: "Asia/Kolkata",
+});
 
   /* ── body lock ── */
   useEffect(() => {
@@ -430,8 +440,8 @@ useEffect(() => {
       {/* ══════════════ NAVBAR ══════════════ */}
       <nav id="navbar" className={scrolled ? "scrolled" : ""}>
         <button className="nav-logo" onClick={() => go("home")}>
-          <Image src={logo} alt="logo" height={90} width={90}/>
-          <span className="nav-logo-txt">Cognosutra</span>
+          <Image src={logo} alt="logo" height={70} width={70}/>
+          {/* <span className="nav-logo-txt">Cognosutra</span> */}
         </button>
         <div className="nav-right">
           <span className="unfold-txt">Unfold</span>
@@ -500,7 +510,8 @@ useEffect(() => {
            document.body.classList.toggle('dark');
          }}>
            <span style={{ fontSize:"1.4rem" }}>☁️</span>
-           <span>Touch the cloud, no thunder, promise !!</span>
+           <span>{time}</span>
+           <span>{date}</span>
          </div>
       </section>
 
@@ -531,7 +542,7 @@ useEffect(() => {
             </p>
           </div>
           <div className="about-photo fade-scale">
-            <Image src={IMGS.oceanData} alt="Business data analytics"
+            <Image src={girl1} alt="Business data analytics"
               fill style={{ objectFit:"cover", borderRadius:16 }} />
           </div>
         </div>
@@ -617,7 +628,7 @@ useEffect(() => {
               Both equal, both essential.
             </h2>
             <button className="btn3d ghost fade-scale" onClick={() => go("contact")}>
-              <span className="top">Meet Us</span>
+              {/* <span className="top">Meet Us</span> */}
               {/* <span className="bot" /> */}
             </button>
           </div>
@@ -650,7 +661,10 @@ useEffect(() => {
       }}
     />
   ))}
+  
 </div>
+<h2 className="amplitude">Amplitude over noise</h2>
+
 
         {/* Changed from "Amplitude Over Noise" → "Contact Us" */}
         <div className="amp-label txt-reveal">
