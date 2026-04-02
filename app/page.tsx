@@ -1,6 +1,15 @@
 "use client";
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
+import logo from "../public/cropped_circle_image.png"
+import factory_floor from "../public/Factory floor, precise machinery, assembly line.jpg";
+import freight_coridor from "../public/logistics transportation.jpg";
+import office_meeting from "../public/office mettimng.png";
+import rabbit from "../public/rabbit helps the tortoise in the racetrack ( the non traditional thinking where they are not compete in the marathon, rather cooperating).jpg";
+import retail from "../public/retail.jpg";
+import girl from "../public/Gemini_Generated_Image_p425nlp425nlp425.png";
+import art from "../public/Art gallery.png";
+import lapy from "../public/image.png";
 
 /* ─────────────────────────────────────────
    ALL UNSPLASH IMAGES — reliable, themed
@@ -371,7 +380,7 @@ useEffect(() => {
       {/* ══════════════ NAVBAR ══════════════ */}
       <nav id="navbar" className={scrolled ? "scrolled" : ""}>
         <button className="nav-logo" onClick={() => go("home")}>
-          <Logo />
+          <Image src={logo} alt="logo" height={90} width={90}/>
           <span className="nav-logo-txt">Cognosutra</span>
         </button>
         <div className="nav-right">
@@ -481,8 +490,7 @@ useEffect(() => {
       {/* ══════════════ §3 TEAM / VALUES ══════════════ */}
       <section id="team">
         <div className="team-hero">
-          <Image src={IMGS.team} alt="Built by Friends, Driven by Curiosity"
-            fill style={{ objectFit:"cover", objectPosition:"top center" }} />
+          <Image src={office_meeting} alt="Built by Friends, Driven by Curiosity" />
           <div className="team-hero-ov" />
           <div className="team-hero-txt">
             <h2 className="txt-reveal">Built by Friends, Driven by Curiosity</h2>
@@ -501,7 +509,7 @@ useEffect(() => {
         {/* DISCIPLINED */}
         <div className="val-disciplined">
           <div className="left-img img-zoom-hover">
-            <Image src={IMGS.disciplinedLeft} alt="Precision factory — disciplined"
+            <Image src={factory_floor} alt="Precision factory — disciplined"
               fill style={{ objectFit:"cover" }} />
           </div>
           <div className="right-col">
@@ -509,14 +517,14 @@ useEffect(() => {
               <span className="slide-up" style={{ display:"block",fontFamily:"var(--fM)",fontSize:".7rem",
                 color:"var(--ac)",letterSpacing:".12em",opacity:.6,marginBottom:".5rem" }}>01</span>
               <h3 className="txt-reveal" style={{ fontFamily:"var(--fD)",
-                fontSize:"clamp(1.8rem,3vw,2.8rem)",fontWeight:800,
+                fontSize:"clamp(1.8rem,3vw,2.8rem)",fontWeight:200,
                 letterSpacing:"-.02em",marginBottom:".8rem" }}>DISCIPLINED</h3>
               <p className="slide-up" style={{ color:"var(--t2)",fontSize:".9rem",lineHeight:1.8,maxWidth:320 }}>
                 Structure without rigidity. Every step measured, nothing wasted.
               </p>
             </div>
             <div className="right-img img-zoom-hover">
-              <Image src={IMGS.disciplinedRight} alt="Business strategy session"
+              <Image src={freight_coridor} alt="Business strategy session"
                 fill style={{ objectFit:"cover", objectPosition:"center" }} />
             </div>
           </div>
@@ -529,8 +537,8 @@ useEffect(() => {
             <h3 className="txt-reveal">AGILITY</h3>
           </div>
            <div className="agility-full-img img-zoom-hover">
-             <Image src="/ip.jpg" alt="Shipyard containers — agility in motion"
-               fill style={{ objectFit:"cover" }} />
+             <Image src={retail} alt="Shipyard containers — agility in motion"
+               fill style={{ objectFit:"cover" }}  />
            </div>
           <div className="agility-strip-bottom">
             <h3 className="txt-reveal">PRAGMATIC</h3>
@@ -540,8 +548,8 @@ useEffect(() => {
 
         {/* CONSUMER CENTRIC */}
           <div className="val-pragmatic-img img-zoom-hover">
-            <Image src="/office mettimng.png" alt="Consumer centric — people first"
-               fill style={{ objectFit:"contain" }} />
+            <Image src={girl} alt="Consumer centric — people first"
+               fill style={{ objectFit:"cover" }} />
           </div>
         <div className="val-consumer-strip">
           <h3 className="txt-reveal">Consumer Centric</h3>
@@ -550,8 +558,8 @@ useEffect(() => {
 
         {/* MOTTO */}
          <div className="motto-banner">
-           <Image src="/pp.png" alt="Fast thinkers. Careful validators."
-             fill style={{ objectFit:"cover", objectPosition:"center 25%" }} />
+           <Image src={rabbit} alt="Fast thinkers. Careful validators."
+             fill style={{ objectFit:"cover" }} />
           <div className="motto-ov" />
           <div className="motto-content">
             <h2 className="txt-reveal">
@@ -560,7 +568,7 @@ useEffect(() => {
             </h2>
             <button className="btn3d ghost fade-scale" onClick={() => go("contact")}>
               <span className="top">Meet Us</span>
-              <span className="bot" />
+              {/* <span className="bot" /> */}
             </button>
           </div>
         </div>
@@ -572,7 +580,7 @@ useEffect(() => {
           <h2 className="txt-reveal">What We Do, We search!</h2>
         </div>
 
-        <div className="eq-visualizer fade-scale">
+        {/* <div className="eq-visualizer fade-scale">
           {EQ_COLS.map((segs, ci) => (
             <div className="eq-col" key={ci}>
               {Array.from({ length: segs }).map((_, si) => (
@@ -581,7 +589,18 @@ useEffect(() => {
               ))}
             </div>
           ))}
-        </div>
+        </div> */}
+           <div className="eq-visualizer fade-scale">
+  {EQ_COLS.map((_, ci) => (
+    <div
+      key={ci}
+      className="eq-bar"
+      style={{
+        animationDelay: `${ci * 0.12}s`
+      }}
+    />
+  ))}
+</div>
 
         {/* Changed from "Amplitude Over Noise" → "Contact Us" */}
         <div className="amp-label txt-reveal">
@@ -597,11 +616,11 @@ useEffect(() => {
         <div className="catalog-split">
           <CatalogFlipCard />
           <div className="catalog-right img-zoom-hover">
-            <Image src={IMGS.catalog} alt="Data analytics solutions" fill style={{ objectFit:"cover" }} />
+            <Image src={art} alt="Data analytics solutions" fill style={{ objectFit:"cover" }} />
           </div>
         </div>
 
-         <div className="premium-section" style={{ backgroundImage: `url('/Art gallery.png')`, backgroundSize: 'cover', backgroundPosition: 'center', padding: '4rem 0', position: 'relative' }}>
+         <div className="premium-section" >
            <div className="premium-inner" style={{ position: 'relative', zIndex: 2 }}>
              <h2 className="txt-reveal">Premium Solutions !!</h2>
              <p className="slide-up">
@@ -616,8 +635,11 @@ useEffect(() => {
                </div>
              </a>
            </div>
+           
+           
            <div className="premium-overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.5)', zIndex: 1 }}></div>
          </div>
+         <Image src={lapy} alt="Premium solutions" className="premium-img"/>
       </section>
 
       {/* ══════════════ §5 CONTACT ══════════════ */}
@@ -646,7 +668,7 @@ useEffect(() => {
               Drop by, call us, or just send a message.
             </p>
             <div className="contact-icons-row">
-              <a href="mailto:hello@cognosutra.com" className="cicon big" title="Email">✉</a>
+              <a href="mailto:hello@cognosutra.com" className="cicon" title="Email">✉</a>
               <a href="tel:+91" className="cicon" title="Call us">☏</a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
                 className="cicon li-ico" title="LinkedIn">in</a>
@@ -661,7 +683,7 @@ useEffect(() => {
           <div className="footer-top">
             <div className="footer-brand">
               <div className="logo-row"><Logo /><span className="nav-logo-txt">Cognosutra</span></div>
-              <p>Decoding business chaos into clarity.<br />Kolkata, West Bengal, India.</p>
+              <p className="text-green">Decoding business chaos into clarity.<br />Kolkata, West Bengal, India.</p>
               <div className="footer-socials">
                 <a href="mailto:hello@cognosutra.com" className="f-ico" title="Email">✉</a>
                 <a href="tel:+91" className="f-ico" title="Phone">☏</a>
