@@ -305,7 +305,8 @@ export default function Home() {
   const [activeId,   setActiveId]   = useState("home");
 
   const videoRef    = useRef<HTMLVideoElement>(null);
-  const videoWrapRef = useRef<HTMLDivElement>(null);   // parallax via DOM ref, no re-render
+  const videoWrapRef = useRef<HTMLDivElement>(null);  
+  const [weather, setWeather] = useState<any>(null);
 
   /* ── scroll spy + parallax via DOM (no state, no re-render = video keeps playing) ── */
   useEffect(() => {
@@ -426,6 +427,13 @@ useEffect(() => {
     setDrawerOpen(false);
     setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), drawerOpen ? 300 : 0);
   }, [drawerOpen]);
+  const getWeather = async () => {
+  const res = await fetch("/api/weather");
+  const data = await res.json();
+  setWeather(data);
+  console.log(data);
+};
+useEffect(() => {getWeather();}, []);
 
   /* Parallax done via DOM ref above — no variables needed here */
 
@@ -510,8 +518,13 @@ useEffect(() => {
            document.body.classList.toggle('dark');
          }}>
            <span style={{ fontSize:"1.4rem" }}>☁️</span>
+           {/* <span>{weather?.main}</span> */}
+           <span>{weather?.clouds?.all}</span>
+           <span>{weather?.main?.temp.toFixed(1)}°C</span>
            <span>{time}</span>
            <span>{date}</span>
+           
+           {/* <span>{getWeather}°C</span> */}
          </div>
       </section>
 
